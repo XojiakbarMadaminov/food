@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -29,8 +30,11 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::hex('#484ab5')
             ])
+            ->globalSearch(false)
+            ->favicon(url('images/oson-pos-logo.png'))
+            ->darkMode()
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\Filament\Admin\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\Filament\Admin\Pages')
             ->pages([
@@ -41,6 +45,15 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
                 FilamentInfoWidget::class,
             ])
+//            ->plugins([
+//                FilamentShieldPlugin::make()
+//                    ->navigationGroup(\App\Enums\NavigationGroup::Settings),
+//            ])
+            ->maxContentWidth('screen-2xl')
+            ->topNavigation()
+            ->brandName('Oson-POS')
+            ->resourceCreatePageRedirect('index')
+            ->resourceEditPageRedirect('index')
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

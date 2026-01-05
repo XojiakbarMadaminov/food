@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\Categories;
 
+use App\Enums\NavigationGroup;
 use App\Filament\Admin\Resources\Categories\Pages\CreateCategory;
 use App\Filament\Admin\Resources\Categories\Pages\EditCategory;
 use App\Filament\Admin\Resources\Categories\Pages\ListCategories;
@@ -18,9 +19,11 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static string|null|\UnitEnum $navigationGroup = NavigationGroup::ProductsAndCategories;
+    protected static ?string $navigationLabel               = 'Kategoriyalar';
+    protected static ?string $label                         = 'Kategoriya';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Tag;
+    protected static ?int $navigationSort                   = 2;
 
     public static function form(Schema $schema): Schema
     {

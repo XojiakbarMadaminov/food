@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources\Products\Schemas;
 
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
@@ -19,9 +20,9 @@ class ProductForm
                     ->schema([
                         TextInput::make('name')
                             ->label('Name')
-                            ->columnSpanFull()
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->columnSpanFull(),
 
                         TextInput::make('price')
                             ->label('Price')
@@ -34,6 +35,12 @@ class ProductForm
                             ->searchable()
                             ->preload()
                             ->required(),
+
+                        SpatieMediaLibraryFileUpload::make('image')
+                            ->label('Image')
+                            ->collection('image')
+                            ->image()
+                            ->columnSpanFull(),
                     ]),
 
                 Section::make('Visibility')
