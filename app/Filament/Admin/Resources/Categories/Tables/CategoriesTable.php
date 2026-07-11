@@ -20,6 +20,12 @@ class CategoriesTable
                     ->searchable()
                     ->sortable(),
 
+                TextColumn::make('description')
+                    ->label('Description')
+                    ->limit(50)
+                    ->searchable()
+                    ->toggleable(),
+
                 IconColumn::make('is_active')
                     ->label('Active')
                     ->boolean(),
